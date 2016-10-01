@@ -4,7 +4,7 @@ namespace MerezaProject\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use MerezaProject\Client;
+use MerezaProject\Models\Client;
 use MerezaProject\Http\Requests;
 
 class ClientController extends Controller
@@ -16,7 +16,7 @@ class ClientController extends Controller
      */
     public function index()
     {
-        return \MerezaProject\Client::all();
+        return \MerezaProject\Models\Client::all();
     }
 
     /**
@@ -37,7 +37,7 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        return \MerezaProject\Client::create($request->all());
+        return \MerezaProject\Models\Client::create($request->all());
     }
 
     /**
@@ -71,7 +71,7 @@ class ClientController extends Controller
      */
     public function update(Request $request, $id)
     {
-		if (\MerezaProject\Client::find($id)->update($request->all())) {
+		if (Client::find($id)->update($request->all())) {
 			return Client::find($id);
 		}else{
 			return "Erro ao editar.";

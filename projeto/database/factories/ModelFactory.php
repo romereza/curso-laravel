@@ -11,7 +11,7 @@
 |
 */
 
-$factory->define(MerezaProject\User::class, function (Faker\Generator $faker) {
+$factory->define(MerezaProject\Models\User::class, function (Faker\Generator $faker) {
     static $password;
 
     return [
@@ -22,7 +22,7 @@ $factory->define(MerezaProject\User::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(MerezaProject\Client::class, function (Faker\Generator $faker) {
+$factory->define(MerezaProject\Models\Client::class, function (Faker\Generator $faker) {
 	return [
 		'name' => $faker->name,
 		'responsible' => $faker->name,

@@ -68,3 +68,8 @@ php artisan make:seeder PostsTableSeeder
 
 //Rodando os Seeders
 php artisan db:seed;
+
+==============================================
+/** INSTALL LIBRARY REPOSITORY **/
+============================================
+https://github.com/andersao/l5-repository

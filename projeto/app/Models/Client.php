@@ -1,6 +1,6 @@
 <?php
 
-namespace MerezaProject;
+namespace MerezaProject\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
