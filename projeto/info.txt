@@ -1,0 +1,70 @@
+//instalar novo projeto (v5.3)
+composer global require "laravel/installer"
+laravel new blog
+
+//reinstalar laravel
+composer install
+
+//atribuindo nemaspace do projeto
+php artisan app:name Estudo
+
+//Rever dependencias
+composer dump-autoload
+
+//Generating a New Application Key
+// criar arquivo .env
+php artisan key:generate 
+
+//criar controler
+php artisan make:controller IndexController (controler em branco)
+php artisan make:controller IndexController --resource (controler com métodos básicos declarados)
+
+//criar model
+php artisan make:model Post
+
+//criar model + migration
+php artisan make:model Gallery -m
+
+==================
+/** MIGRATIONS **/
+==================
+//criar migration
+php artisan make:migration create_posts_table --create=posts (criar tabela posts)
+
+//Rodar Migrations
+php artisan migrate
+
+//Reverter a última Migrations
+php artisan migrate:rollback
+
+//Reverter todas Migrations
+php artisan migrate:reset
+
+//rollback + run Migrations
+php artisan migrate:refresh
+php artisan migrate:refresh --seed (executa as seeders)
+
+==================
+
+//acessar tinker
+php artisan tinker
+
+//criando um objeto via ModelFactory (tinker)
+factory('Estudo\Post')->make();
+
+//criando um objeto e pressistindo no banco via ModelFactory (tinker)
+factory('Estudo\Post')->create();
+factory('Estudo\Post', 5)->create();
+
+//procurar por funçoes do artisanb(ex: seed)
+php artisan | grep seed
+
+==================
+/** SEEDERS **/
+==================
+
+//Criando Seeders
+php artisan make:seeder PostsTableSeeder
+
+//Rodando os Seeders
+php artisan db:seed;
