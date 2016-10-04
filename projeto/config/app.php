@@ -177,6 +177,7 @@ return [
         // MerezaProject\Providers\BroadcastServiceProvider::class,
         MerezaProject\Providers\EventServiceProvider::class,
         MerezaProject\Providers\RouteServiceProvider::class,
+        MerezaProject\Providers\MerezaProjectRepositoryProvider::class,
 
     ],
 

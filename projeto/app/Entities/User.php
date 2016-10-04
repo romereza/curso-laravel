@@ -1,6 +1,6 @@
 <?php
 
-namespace MerezaProject\Models;
+namespace MerezaProject\Entities;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
