@@ -3,21 +3,32 @@
 namespace MerezaProject\Http\Controllers;
 
 use Illuminate\Http\Request;
+use MerezaProject\Services\ClientService;
 use MerezaProject\Repositories\ClientRepository;
 
+/**
+ * Class ClientController
+ * @package MerezaProject\Http\Controllers
+ */
 class ClientController extends Controller
 {
 	/**
 	 * @var ClientRepository
 	 */
 	private $repository;
+	/**
+	 * @var ClientService
+	 */
+	private $service;
 
 	/**
 	 * ClientController constructor.
 	 * @param ClientRepository $repository
+	 * @param ClientService $service
 	 */
-	public function __construct(ClientRepository $repository) {
+	public function __construct(ClientRepository $repository, ClientService $service) {
 		$this->repository = $repository;
+		$this->service = $service;
 	}
 
 	/**
@@ -48,7 +59,7 @@ class ClientController extends Controller
 	 */
 	public function store(Request $request)
 	{
-		return $this->repository->create($request->all());
+		return $this->service->create($request->all());
 	}
 
 	/**
@@ -82,12 +93,7 @@ class ClientController extends Controller
 	 */
 	public function update(Request $request, $id)
 	{
-		if ($this->repository->find($id)->update($request->all())) {
-			return $this->repository->find($id);
-		} else {
-			return "Erro ao editar.";
-		}
-
+		return $this->service->update($request->all(), $id);
 	}
 
 	/**
@@ -98,6 +104,7 @@ class ClientController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$this->repository->find($id)->delete();
+//		$this->repository->find($id)->delete();
+		$this->repository->delete($id);
 	}
 }
