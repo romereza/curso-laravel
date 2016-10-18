@@ -23,6 +23,7 @@ class MerezaProjectRepositoryProvider extends ServiceProvider
 	 */
 	public function register()
 	{
+		//Instaciar ClientRepositoryEloquent ao chamar ClientRepository
 		$this->app->bind(
 			\MerezaProject\Repositories\ClientRepository::class,
 			\MerezaProject\Repositories\ClientRepositoryEloquent::class
