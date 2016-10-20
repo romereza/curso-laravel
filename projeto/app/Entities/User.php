@@ -26,4 +26,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+	/**
+	 * Get the Projects for the User.
+	 */
+	public function projects()
+	{
+		return $this->hasMany('MerezaProject\Entities\Projects', 'owner_id', 'id');
+	}
 }

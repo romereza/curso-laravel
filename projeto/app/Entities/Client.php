@@ -14,4 +14,12 @@ class Client extends Model
     	"address",
     	"obs"
 	];
+
+	/**
+	 * Get the Projects for the Client.
+	 */
+	public function projects()
+	{
+		return $this->hasMany('MerezaProject\Entities\Projects', 'client_id', 'id');
+	}
 }

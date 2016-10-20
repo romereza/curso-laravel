@@ -5,9 +5,23 @@ namespace MerezaProject\Http\Controllers;
 use Illuminate\Http\Request;
 
 use MerezaProject\Http\Requests;
+use MerezaProject\Services\ProjectService;
 
 class ProjectController extends Controller
 {
+	/**
+	 * @var ProjectService
+	 */
+	private $service;
+
+	/**
+	 * ProjectController constructor.
+	 * @param ProjectService $service
+	 */
+	public function __construct(ProjectService $service) {
+		$this->service = $service;
+	}
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +29,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        //
+		return $this->service->all();
     }
 
     /**
@@ -36,7 +50,7 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+		return $this->service->create($request->all());
     }
 
     /**
@@ -47,7 +61,7 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        //
+		return $this->service->find($id);
     }
 
     /**
@@ -70,7 +84,7 @@ class ProjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+		return $this->service->update($request->all(), $id);
     }
 
     /**
@@ -81,6 +95,6 @@ class ProjectController extends Controller
      */
     public function destroy($id)
     {
-        //
+		return $this->service->delete($id, "Projeto");
     }
 }
