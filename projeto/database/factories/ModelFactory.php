@@ -43,10 +43,10 @@ $factory->define(MerezaProject\Entities\Project::class, function (Faker\Generato
 	return [
 		'owner_id' => $owner["id"],
 		'client_id' => $client["id"],
-		'name' => $faker->name,
+		'name' => $faker->word,
 		'description' => $faker->sentence,
-		'progress' => $faker->randomElement(["Aberto", "Em andamento", "Em espera", "Finalizado"]),
-		'status' => $faker->randomElement(["1", "0"]),
+		'progress' => rand(0,100),
+		'status' => rand(1,3),
 		'due_date' => $faker->dateTimeBetween("now", "+5 month"),
 	];
 });

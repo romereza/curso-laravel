@@ -18,6 +18,7 @@ namespace MerezaProject\Services;
 
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Database\QueryException;
 use MerezaProject\Repositories\ClientRepository;
 use MerezaProject\Validators\ClientValidator;
 use Prettus\Validator\Contracts\ValidatorInterface;
@@ -34,6 +35,11 @@ class DefaultService
 	 * @var ClientValidator
 	 */
 	protected $validator;
+
+	/**
+	 * @var string
+	 */
+	protected $_title = "Item";
 
 	/**
 	 * DefaultService constructor.
@@ -57,21 +63,38 @@ class DefaultService
 		return $this->repository->all($columns);
 	}
 
+
 	/**
 	 * Find data by id
 	 *
-	 * @param       $id
+	 * @param $id
 	 * @param array $columns
-	 *
-	 * @return mixed
+	 * @return \Illuminate\Http\JsonResponse|mixed
 	 */
 	public function find($id, $columns = ['*']) {
-		return $this->repository->find($id, $columns);
+		try{
+			return $this->repository->find($id, $columns);
+		}catch(QueryException $e){
+			return response()->json([
+				'error' => true,
+				'message' => "Erro ao procurar $this->_title. [Q]"
+			],412);
+		}catch(ModelNotFoundException $e){
+			return response()->json([
+				'error' => true,
+				'message' => "$this->_title não encontrado(a)."
+			],412);
+		}catch(\Exception $e){
+			return response()->json([
+				'error' => true,
+				'message' => "Ocorreu ao procurar $this->_title. [E]"
+			],412);
+		}
 	}
 
 	/**
 	 * @param array $data
-	 * @return mixed
+	 * @return \Illuminate\Http\JsonResponse|mixed
 	 */
 	public function create(array $data) {
 
@@ -80,8 +103,18 @@ class DefaultService
 			return $this->repository->create($data);
 		} catch (ValidatorException $e) {
 			return response()->json([
-				'name' => true,
+				'error' => true,
 				'message' => $e->getMessageBag()
+			],412);
+		}catch(QueryException $e){
+			return response()->json([
+				'error' => true,
+				'message' => "Erro ao inserir $this->_title. [Q]"
+			],412);
+		}catch(\Exception $e){
+			return response()->json([
+				'error' => true,
+				'message' => "Ocorreu ao inserir $this->_title. [E]"
 			],412);
 		}
 	}
@@ -97,11 +130,24 @@ class DefaultService
 			return $this->repository->update($data, $id);
 		} catch (ValidatorException $e) {
 			return response()->json([
-				'name' => true,
+				'error' => true,
 				'message' => $e->getMessageBag()
 			],412);
+		}catch(QueryException $e){
+			return response()->json([
+				'error' => true,
+				'message' => "Erro ao atualizar $this->_title. [Q]"
+			],412);
 		} catch(ModelNotFoundException $e) {
-			return $this->returnNotFoundError($id);
+			return response()->json([
+				'error' => true,
+				'message' => "$this->_title não encontrado(a)."
+			],412);
+		}catch(\Exception $e){
+			return response()->json([
+				'error' => true,
+				'message' => "Ocorreu ao atualizar $this->_title. [E]"
+			],412);
 		}
 	}
 
@@ -141,19 +187,30 @@ class DefaultService
 	 * Delete a entity in repository by id
 	 *
 	 * @param $id
-	 * @param string $title
 	 * @return array
 	 */
-	public function delete($id, $title = "Item") {
+	public function delete($id) {
 		try{
 			$this->repository->skipPresenter()->find($id)->delete();
-			return ['success' => true, 'message' => "$title deletado com sucesso!"];
+			return response()->json([
+				'success' => true,
+				'message' => "$this->_title deletado(a) com sucesso!"
+			],200);
 		}catch(QueryException $e){
-			return ['error'=>true,'message'=> "$title não pode ser apagado pois existe um ou mais projetos vinculados a ele."];
+			return response()->json([
+				'error' => true,
+				'message' => "$this->_title não pode ser apagado(a) pois existe um ou mais itens vinculados a ele(a)."
+			],412);
  		}catch(ModelNotFoundException $e){
- 			return ['error'=>true,'message'=> "$title não encontrado."];
+			return response()->json([
+				'error' => true,
+				'message' => "$this->_title não encontrado(a)."
+			],412);
  		}catch(\Exception $e){
- 			return ['error'=>true,'message'=> "Ocorreu um erro ao excluir o $title."];
+			return response()->json([
+				'error' => true,
+				'message' => "Ocorreu um erro ao excluir $this->_title."
+			],412);
  		}
 	}
 }

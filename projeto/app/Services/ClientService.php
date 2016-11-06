@@ -22,6 +22,12 @@ use MerezaProject\Validators\ClientValidator;
 
 class ClientService extends DefaultService
 {
+
+	/**
+	 * @var string
+	 */
+	protected $_title = "Cliente";
+
 	/**
 	 * ClientService constructor.
 	 * @param ClientRepository $repository
