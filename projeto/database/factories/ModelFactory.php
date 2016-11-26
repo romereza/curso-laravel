@@ -50,3 +50,16 @@ $factory->define(MerezaProject\Entities\Project::class, function (Faker\Generato
 		'due_date' => $faker->dateTimeBetween("now", "+5 month"),
 	];
 });
+
+
+$factory->define(MerezaProject\Entities\ProjectNote::class, function (Faker\Generator $faker) {
+//	$faker->word(10);
+
+	$project = $faker->randomElement(\MerezaProject\Entities\Project::all('id')->toArray());
+
+	return [
+		'project_id' => $project["id"],
+		'title' => $faker->word,
+		'note' => $faker->paragraph,
+	];
+});

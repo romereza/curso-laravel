@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
 		$this->call(UserTableSeeder::class);
 		$this->call(ClientTableSeeder::class);
 		$this->call(ProjectTableSeeder::class);
+		$this->call(ProjectNoteTableSeeder::class);
 
 		// supposed to only apply to a single connection and reset it's self
 		// but I like to explicitly undo what I've done for clarity

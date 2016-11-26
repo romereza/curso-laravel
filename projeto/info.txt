@@ -73,3 +73,10 @@ php artisan db:seed;
 /** INSTALL LIBRARY REPOSITORY **/
 ============================================
 https://github.com/andersao/l5-repository
+
+==================
+/** Entity **/
+==================
+
+//Criando Entity
+php artisan make:entity PostsTableSeeder

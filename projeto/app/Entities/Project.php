@@ -32,4 +32,12 @@ class Project extends Model
 	public function client() {
 		return $this->belongsTo('MerezaProject\Entities\Client', 'client_id', 'id');
 	}
+
+	/**
+	 * Get the ProjectNote for the Project.
+	 */
+	public function notes()
+	{
+		return $this->hasMany(ProjectNote::class, 'project_id', 'id');
+	}
 }
