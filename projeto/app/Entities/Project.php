@@ -30,7 +30,7 @@ class Project extends Model
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
 	public function client() {
-		return $this->belongsTo('MerezaProject\Entities\Client', 'client_id', 'id');
+		return $this->belongsTo(Client::class, 'client_id', 'id');
 	}
 
 	/**
