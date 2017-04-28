@@ -43,14 +43,13 @@ $factory->define(MerezaProject\Entities\Project::class, function (Faker\Generato
 	return [
 		'owner_id' => $owner["id"],
 		'client_id' => $client["id"],
-		'name' => $faker->word,
-		'description' => $faker->sentence,
+		'name' => $faker->sentence($nbWords = 6, $variableNbWords = true),
+		'description' => $faker->paragraph,
 		'progress' => rand(0,100),
 		'status' => rand(1,3),
 		'due_date' => $faker->dateTimeBetween("now", "+5 month"),
 	];
 });
-
 
 $factory->define(MerezaProject\Entities\ProjectNote::class, function (Faker\Generator $faker) {
 //	$faker->word(10);
@@ -59,7 +58,21 @@ $factory->define(MerezaProject\Entities\ProjectNote::class, function (Faker\Gene
 
 	return [
 		'project_id' => $project["id"],
-		'title' => $faker->word,
+		'title' => $faker->sentence($nbWords = 6, $variableNbWords = true),
 		'note' => $faker->paragraph,
+	];
+});
+
+$factory->define(MerezaProject\Entities\ProjectTask::class, function (Faker\Generator $faker) {
+//	$faker->word(10);
+
+	$project = $faker->randomElement(\MerezaProject\Entities\Project::all('id')->toArray());
+
+	return [
+		'project_id' => $project["id"],
+		'name' => $faker->sentence($nbWords = 6, $variableNbWords = true),
+		'start_date' => $faker->dateTimeBetween("now", "+1 month"),
+		'due_date' => $faker->dateTimeBetween("+1 month", "+2 month"),
+		'status' => rand(1,3),
 	];
 });

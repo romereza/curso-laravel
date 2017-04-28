@@ -79,4 +79,7 @@ https://github.com/andersao/l5-repository
 ==================
 
 //Criando Entity
-php artisan make:entity PostsTableSeeder
+php artisan make:entity Posts
+
+ALTER USER `root`@`localhost` IDENTIFIED BY '',
+       `root`@`localhost` PASSWORD EXPIRE NEVER;

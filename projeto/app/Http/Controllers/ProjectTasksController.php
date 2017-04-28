@@ -4,24 +4,26 @@ namespace MerezaProject\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use MerezaProject\Entities\ProjectTask;
 use MerezaProject\Http\Requests;
-use MerezaProject\Services\ProjectNoteService;
+use MerezaProject\Services\ProjectTaskService;
 
-class ProjectNotesController extends Controller
+
+class ProjectTasksController extends Controller
 {
+
 	/**
-	 * @var ProjectNoteService
+	 * @var ProjectTaskService
 	 */
 	private $service;
 
 	/**
-	 * ProjectNotesController constructor.
-	 * @param ProjectNoteService $service
+	 * ProjectTasksController constructor.
+	 * @param ProjectTaskService $service
 	 */
-	public function __construct(ProjectNoteService $service) {
+	public function __construct(ProjectTaskService $service) {
 		$this->service = $service;
 	}
-
 
 	/**
 	 * Display a listing of the resource.
@@ -60,13 +62,13 @@ class ProjectNotesController extends Controller
 	 * Display the specified resource.
 	 *
 	 * @param  int  $id
-	 * @param  int  $noteId
+	 * @param  int  $taskId
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function show($id, $noteId)
+	public function show($id, $taskId)
 	{
-		return $this->service->findByProject($id, $noteId);
+		return $this->service->findByProject($id, $taskId);
 	}
 
 	/**
