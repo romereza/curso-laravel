@@ -32,6 +32,9 @@ class User extends Authenticatable
 	 */
 	public function projects()
 	{
-		return $this->hasMany('MerezaProject\Entities\Projects', 'owner_id', 'id');
+//		return $this->hasMany('MerezaProject\Entities\Projects', 'owner_id', 'id');
+		return $this->belongsToMany('MerezaProject\Entities\Projects', 'project_members', 'user_id', 'id');
 	}
+
+
 }

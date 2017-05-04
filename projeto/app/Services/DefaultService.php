@@ -56,7 +56,6 @@ class DefaultService
 	 * Retrieve all data of repository
 	 *
 	 * @param array $columns
-	 *
 	 * @return mixed
 	 */
 	public function all($columns = ['*']) {
@@ -87,7 +86,7 @@ class DefaultService
 		}catch(\Exception $e){
 			return response()->json([
 				'error' => true,
-				'message' => "Ocorreu ao procurar $this->_title. [E]"
+				'message' => "Ocorreu um erro ao procurar $this->_title. [E]"
 			],412);
 		}
 	}
@@ -114,7 +113,7 @@ class DefaultService
 		}catch(\Exception $e){
 			return response()->json([
 				'error' => true,
-				'message' => "Ocorreu ao inserir $this->_title. [E]"
+				'message' => "Ocorreu um erro ao inserir $this->_title. [E]"
 			],412);
 		}
 	}
@@ -122,7 +121,7 @@ class DefaultService
 	/**
 	 * @param array $data
 	 * @param $id
-	 * @return mixed
+	 * @return \Illuminate\Http\JsonResponse|mixed
 	 */
 	public function update(array $data, $id) {
 		try {
@@ -146,7 +145,7 @@ class DefaultService
 		}catch(\Exception $e){
 			return response()->json([
 				'error' => true,
-				'message' => "Ocorreu ao atualizar $this->_title. [E]"
+				'message' => "Ocorreu um erro ao atualizar $this->_title. [E]"
 			],412);
 		}
 	}
@@ -187,7 +186,7 @@ class DefaultService
 	 * Delete a entity in repository by id
 	 *
 	 * @param $id
-	 * @return array
+	 * @return \Illuminate\Http\JsonResponse
 	 */
 	public function delete($id) {
 		try{
@@ -209,7 +208,7 @@ class DefaultService
  		}catch(\Exception $e){
 			return response()->json([
 				'error' => true,
-				'message' => "Ocorreu um erro ao excluir $this->_title."
+				'message' => "Ocorreu um erro um erro ao excluir $this->_title."
 			],412);
  		}
 	}

@@ -20,19 +20,19 @@ namespace MerezaProject\Services;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use League\Flysystem\Exception;
-use MerezaProject\Repositories\ProjectNoteRepository;
-use MerezaProject\Validators\ProjectNoteValidator;
+use MerezaProject\Repositories\ProjectMembersRepository;
+use MerezaProject\Validators\ProjectMembersValidator;
 
 
-class ProjectNoteService extends DefaultService
+class ProjectMemberService extends DefaultService
 {
 
 	/**
 	 * @var string
 	 */
-	protected $_title = "Nota - Projeto";
+	protected $_title = "Membro - Projeto";
 
-	public function __construct(ProjectNoteRepository $repository, ProjectNoteValidator $validator)
+	public function __construct(ProjectMembersRepository $repository, ProjectMembersValidator $validator)
 	{
 		$this->repository = $repository;
 		$this->validator = $validator;
@@ -45,7 +45,7 @@ class ProjectNoteService extends DefaultService
 	 */
 	public function allByProject($id) {
 		try{
-			return $this->repository->findWhere(['project_id' => $id]);
+			return $this->repository->with(["user"])->findWhere(['project_id' => $id]);
 		}catch(QueryException $e){
 			return response()->json([
 				'error' => true,
@@ -55,42 +55,6 @@ class ProjectNoteService extends DefaultService
 			return response()->json([
 				'error' => true,
 				'message' => "Nenhuna $this->_title encontrada."
-			],412);
-		}catch(\Exception $e){
-			return response()->json([
-				'error' => true,
-				'message' => "Ocorreu um erro ao procurar $this->_title. [E]"
-			],412);
-		}
-	}
-
-	/**
-	 * Find data by id and project_id
-	 *
-	 * @param $id
-	 * @param $noteId
-	 * @return \Illuminate\Http\JsonResponse|mixed
-	 */
-	public function findByProject($id, $noteId) {
-		try{
-			$item = $this->repository->with(["project"])->findWhere(['project_id' => $id, 'id' => $noteId]);
-
-			if (!count($item))
-				return response()->json([
-					'error' => true,
-					'message' => "$this->_title não encontrada."
-				],412);
-
-			return $item;
-		}catch(QueryException $e){
-			return response()->json([
-				'error' => true,
-				'message' => "Erro ao procurar $this->_title. [Q]"
-			],412);
-		}catch(ModelNotFoundException $e){
-			return response()->json([
-				'error' => true,
-				'message' => "$this->_title não encontrada."
 			],412);
 		}catch(\Exception $e){
 			return response()->json([

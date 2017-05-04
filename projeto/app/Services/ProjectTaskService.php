@@ -40,9 +40,8 @@ class ProjectTaskService extends DefaultService
 	/**
 	 * Retrieve all data of repository by Project
 	 *
-	 * @param int $id
-	 *
-	 * @return mixed
+	 * @param $id
+	 * @return \Illuminate\Http\JsonResponse|mixed
 	 */
 	public function allByProject($id) {
 		try{
@@ -60,7 +59,7 @@ class ProjectTaskService extends DefaultService
 		}catch(\Exception $e){
 			return response()->json([
 				'error' => true,
-				'message' => "Ocorreu ao procurar $this->_title. [E]"
+				'message' => "Ocorreu um erro ao procurar $this->_title. [E]"
 			],412);
 		}
 	}
@@ -68,10 +67,9 @@ class ProjectTaskService extends DefaultService
 	/**
 	 * Find data by id and project_id
 	 *
-	 * @param       $id
-	 * @param       $taskId
-	 *
-	 * @return mixed
+	 * @param $id
+	 * @param $taskId
+	 * @return \Illuminate\Http\JsonResponse|mixed
 	 */
 	public function findByProject($id, $taskId) {
 		try{
@@ -97,7 +95,7 @@ class ProjectTaskService extends DefaultService
 		}catch(\Exception $e){
 			return response()->json([
 				'error' => true,
-				'message' => "Ocorreu ao procurar $this->_title. [E]"
+				'message' => "Ocorreu um erro ao procurar $this->_title. [E]"
 			],412);
 		}
 	}

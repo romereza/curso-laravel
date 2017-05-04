@@ -97,4 +97,43 @@ class ProjectController extends Controller
     {
 		return $this->service->delete($id);
     }
+
+	/**
+	 * Add member
+	 *
+	 * @param $id
+	 * @param $member_id
+	 * @return \Illuminate\Http\JsonResponse
+	 */
+	public function addMember($id, $member_id)
+	{
+		return $this->service->addMember($id, $member_id);
+	}
+
+	/**
+	 * @param $id
+	 * @param $member_id
+	 * @return \Illuminate\Http\JsonResponse
+	 */
+	public function removeMember($id, $member_id)
+	{
+		return $this->service->removeMember($id, $member_id);
+	}
+
+	/**
+	 * @param $id
+	 * @param $member_id
+	 * @return \Illuminate\Http\JsonResponse
+	 */
+	public function isMember($id, $member_id)
+	{
+		$isMember = $this->service->isMember($id, $member_id);
+		if ($isMember)
+			return $isMember;
+
+		return response()->json([
+			'error' => true,
+			'message' => "Membro - Projeto não encontrado."
+		], 412);
+	}
 }

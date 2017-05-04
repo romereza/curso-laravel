@@ -47,5 +47,11 @@ class MerezaProjectRepositoryProvider extends ServiceProvider
 			\MerezaProject\Repositories\ProjectTaskRepositoryEloquent::class
 		);
 
+		//Instanciar ProjectMembersRepositoryEloquent ao chamar ProjectMembersRepository
+		$this->app->bind(
+			\MerezaProject\Repositories\ProjectMembersRepository::class,
+			\MerezaProject\Repositories\ProjectMembersRepositoryEloquent::class
+		);
+
 	}
 }

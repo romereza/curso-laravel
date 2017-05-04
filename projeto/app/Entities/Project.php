@@ -48,4 +48,12 @@ class Project extends Model
 	{
 		return $this->hasMany(ProjectTask::class, 'project_id', 'id');
 	}
+
+	/**
+	 * Get the ProjectMembers for the Project.
+	 */
+	public function members()
+	{
+		return $this->belongsToMany(User::class, "project_members", 'project_id', 'user_id');
+	}
 }

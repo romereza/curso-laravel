@@ -76,3 +76,15 @@ $factory->define(MerezaProject\Entities\ProjectTask::class, function (Faker\Gene
 		'status' => rand(1,3),
 	];
 });
+
+$factory->define(MerezaProject\Entities\ProjectMembers::class, function (Faker\Generator $faker) {
+//	$faker->word(10);
+
+	$project = $faker->randomElement(\MerezaProject\Entities\Project::all('id')->toArray());
+	$member = $faker->randomElement(\MerezaProject\Entities\User::all('id')->toArray());
+
+	return [
+		'project_id' => $project["id"],
+		'user_id' => $member["id"],
+	];
+});
