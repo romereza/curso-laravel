@@ -2,7 +2,7 @@
 
 namespace MerezaProject\Http\Controllers\Auth;
 
-use MerezaProject\User;
+use MerezaProject\Entities\User;
 use Validator;
 use MerezaProject\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;

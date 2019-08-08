@@ -30,7 +30,7 @@ return [
     ],
 
     'stripe' => [
-        'model' => MerezaProject\User::class,
+        'model' => MerezaProject\Entities\User::class,
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],

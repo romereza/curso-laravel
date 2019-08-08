@@ -33,7 +33,7 @@ Route::get('project/{id}/task/{taskId}', 'ProjectTasksController@show');
 Route::delete('project/task/{id}', 'ProjectTasksController@destroy');
 Route::put('project/task/{id}', 'ProjectTasksController@update');
 
-Route::get('project/{id}/members', 'ProjectMembersController@index');
+Route::get('project/{id}/members', 'ProjectMembersController@index')->middleware('auth:api');
 Route::get('project/{id}/member/{member_id}', 'ProjectController@isMember');
 Route::post('project/{id}/member/{member_id}', 'ProjectController@addMember');
 Route::delete('project/{id}/member/{member_id}', 'ProjectController@removeMember');
@@ -43,3 +43,6 @@ Route::post('project', 'ProjectController@store');
 Route::get('project/{id}', 'ProjectController@show');
 Route::delete('project/{id}', 'ProjectController@destroy');
 Route::put('project/{id}', 'ProjectController@update');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');

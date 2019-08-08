@@ -167,6 +167,7 @@ return [
          * Package Service Providers...
          */
 		Prettus\Repository\Providers\RepositoryServiceProvider::class,
+	    Laravel\Passport\PassportServiceProvider::class,
         //
 
         /*

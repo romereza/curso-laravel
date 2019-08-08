@@ -83,3 +83,9 @@ php artisan make:entity Posts
 
 ALTER USER `root`@`localhost` IDENTIFIED BY '',
        `root`@`localhost` PASSWORD EXPIRE NEVER;
+
+==================
+/** PASSAPORT **/
+==================
+//Criando rotas e view de autenticação
+php artisan make:auth
